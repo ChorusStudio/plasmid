@@ -25,6 +25,6 @@ public class PlasmidRegistries {
     }
 
     public static void registerDynamicRegistries() {
-        DynamicRegistries.register(PlasmidRegistryKeys.GAME_CONFIG, GameConfig.REGISTRY_CODEC);
+        DynamicRegistries.register(PlasmidRegistryKeys.GAME_CONFIG, GameConfig.DIRECT_CODEC);
     }
 }

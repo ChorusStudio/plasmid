@@ -40,8 +40,8 @@ public record TeamColorMapTemplateProcessor(List<DyeColor> baseColors) implement
 
     @Override
     public void processTemplate(MapTemplate template, ContextMap.Builder parameters) {
-        parameters.create(CONTEXT_TYPE);
-        var teamList = parameters.getParameter(MapLoadContexts.TEAM_LIST).list();
+        ContextMap contextMap = parameters.buildAndValidate(CONTEXT_TYPE);
+        var teamList = contextMap.getOrThrow(MapLoadContexts.TEAM_LIST).list();
 
         if (teamList.size() > this.baseColors.size()) {
             throw new GameOpenException(Component.literal("Not enough base colors provided for the number of teams."));

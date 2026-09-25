@@ -20,15 +20,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import xyz.nucleoid.plasmid.api.game.common.OldCombat;
 import xyz.nucleoid.plasmid.mixin.DataComponentInitializersAccessor;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -129,8 +123,10 @@ public class OldCombatTests {
         //noinspection unchecked
         ((DataComponentInitializersAccessor) BuiltInRegistries.DATA_COMPONENT_INITIALIZERS)
                 .getInitializers().stream().filter(x -> x.key().identifier().equals(id.identifier()))
-                        .findAny().orElseThrow().initializer().run(builder,
-                        RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), (ResourceKey) id);
+                .findAny()
+                .orElseThrow()
+                .initializer()
+                .run(builder, RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), (ResourceKey) id);
 
         entry.bindComponents(builder.build());
     }
