@@ -2,10 +2,13 @@ package xyz.nucleoid.plasmid.test;
 
 import net.minecraft.SharedConstants;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.Bootstrap;
 import net.minecraft.tags.ItemTags;
@@ -17,6 +20,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BlockTransformers;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -28,10 +32,18 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OldCombatTests {
+
+    private static HolderLookup.Provider registries;
+
     @BeforeAll
     public static void beforeAll() {
         SharedConstants.tryDetectVersion();
         Bootstrap.bootStrap();
+
+        // register BLOCK_TRANSFORMER first or it won't contain
+        registries = new RegistrySetBuilder()
+                .add(Registries.BLOCK_TRANSFORMER, BlockTransformers::bootstrap)
+                .build(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY));
 
         // Work around tags not being bound
         bindTag(Items.WOODEN_SWORD, ItemTags.SWORDS);
@@ -126,7 +138,7 @@ public class OldCombatTests {
                 .findAny()
                 .orElseThrow()
                 .initializer()
-                .run(builder, RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), (ResourceKey) id);
+                .run(builder, registries, (ResourceKey) id);
 
         entry.bindComponents(builder.build());
     }
