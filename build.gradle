@@ -93,16 +93,16 @@ dependencies {
   api include("xyz.nucleoid:fantasy:${project.fantasy_version}") {
     exclude(group: "net.fabricmc.fabric-api")
   }
-  api include("xyz.nucleoid:more-codecs:${project.more_codecs_version}") {
+  api include("com.github.ChorusStudio:more-codecs:${project.more_codecs_version}") {
     exclude(group: "net.fabricmc.fabric-api")
   }
-  api include("xyz.nucleoid:stimuli:${project.stimuli_version}") {
+  api include("com.github.ChorusStudio:stimuli:${project.stimuli_version}") {
     exclude(group: "net.fabricmc.fabric-api")
   }
-  api include("xyz.nucleoid:map-templates:${project.map_templates_version}") {
+  api include("com.github.ChorusStudio:map-templates:${project.map_templates_version}") {
     exclude(group: "net.fabricmc.fabric-api")
   }
-  api include("xyz.nucleoid:substrate:${project.substrate_version}") {
+  api include("com.github.ChorusStudio:substrate:${project.substrate_version}") {
     exclude(group: "net.fabricmc.fabric-api")
   }
   api "eu.pb4:polymer-core:${project.polymer_version}"
@@ -111,10 +111,10 @@ dependencies {
   api "eu.pb4:polymer-blocks:${project.polymer_version}"
   api "eu.pb4:polymer-virtual-entity:${project.polymer_version}"
   api include("eu.pb4:sgui:${project.sgui_version}")
-  api include("eu.pb4:sidebar-api:${project.sidebar_api_version}")
+  api include("com.github.ChorusStudio:SidebarAPI:${project.sidebar_api_version}")
   api include("eu.pb4:placeholder-api:${project.placeholder_api_version}")
-  api include("eu.pb4:map-canvas-api:${project.map_canvas_api_version}")
-  api include("eu.pb4:player-data-api:${project.player_data_api_version}")
+  api include("com.github.ChorusStudio:map-canvas-api:${project.map_canvas_api_version}")
+  api include("com.github.ChorusStudio:PlayerDataAPI:${project.player_data_api_version}")
   api include("eu.pb4:predicate-api:${project.predicate_api_version}") {
     exclude(group: "net.fabricmc.fabric-api")
   }
